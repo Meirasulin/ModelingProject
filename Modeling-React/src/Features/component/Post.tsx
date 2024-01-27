@@ -3,41 +3,66 @@ import { Prop } from "../types/postsTypes";
 
 const Post = ({ post, setLink }: Prop) => {
   return (
-    <div className="bg-white shadow rounded-lg w-96 mx-auto">
-      <div className="flex items-center p-4">
+    <div className="bg-white shadow rounded-lg">
+      <div
+        className="flex items-center px-4 py-3"
+        onClick={() => setLink(`user/${post.owner.id}/post`)}
+      >
         <img
-          className="w-12 h-12 rounded-full mr-4"
+          className="w-12 h-12 rounded-full border-2 border-blue-500 p-1 mr-3"
           src={post.owner.picture}
           alt={`${post.owner.firstName} ${post.owner.lastName}`}
-          onClick={() => setLink(`user/${post.id}/post`)}
         />
 
-        <div>
-          <div className="font-bold text-lg">
-            {post.owner.firstName} {post.owner.lastName}
-          </div>
-          <div className="text-sm text-gray-500">{post.publishDate}</div>
-        </div>
+        <h4 className="font-bold text-gray-800">
+          {post.owner.firstName} {post.owner.lastName}
+        </h4>
       </div>
 
-      <div className="px-4 pb-4 h-96 flex flex-col justify-between">
-        <p className="text-gray-800 font-normal">{post.text}</p>
+      <img
+        className="w-full h-96 object-cover rounded-b-lg"
+        src={post.image}
+        alt={post.text}
+      />
 
-        {post.image && (
-          <img
-            className="w-full max-h-40 object-cover rounded-md"
-            src={post.image}
-            alt={post.text}
-          />
-        )}
+      <div className="p-4">
+        <p className="font-medium text-gray-800">{post.text}</p>
 
-        <div className="flex justify-between items-center text-gray-500 text-sm">
-          <span>{post.likes} Likes</span>
+        <div className="mt-4 flex justify-between text-xs text-gray-500">
+          <div className="flex items-center">
+            <svg
+              className="w-8 h-8 text-red-500 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="red"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z"
+              />
+              <text
+                x="50%"
+                y="60%"
+                textAnchor="middle"
+                fill="#333"
+                // className="h-1/3 w-1/3"
+              >
+                {post.likes}
+              </text>
+            </svg>
+          </div>
 
           <div className="flex flex-wrap">
-            {post.tags.map((tag) => (
-              <span className="bg-gray-200 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
-                #{tag}
+            {post.tags.map((tag, i) => (
+              <span
+                key={i}
+                className="bg-blue-100 text-blue-600 text-xs font-medium mr-2 px-2 py-1 rounded"
+              >
+                {tag}
               </span>
             ))}
           </div>

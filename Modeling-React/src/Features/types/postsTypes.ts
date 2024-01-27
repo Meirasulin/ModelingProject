@@ -5,7 +5,7 @@ export type TypePostInfo = {
   likes: number;
   tags: string[];
   publishDate: string;
-  owner: { firstName: string; lastName: string; picture: string };
+  owner: { firstName: string; lastName: string; picture: string; id: string };
 };
 
 export type Prop = {

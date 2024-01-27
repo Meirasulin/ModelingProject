@@ -1,9 +1,5 @@
 import axios from "axios";
-
-export const url = {
-  postByUser: "https://dummyapi.io/data/v1/user/",
-  allPost: "https://dummyapi.io/data/v1/post",
-};
+import shuffle from "./shuffleArr";
 
 const getAllPosts = async (req: string) => {
   const url = "https://dummyapi.io/data/v1/";
@@ -17,7 +13,8 @@ const getAllPosts = async (req: string) => {
     });
     if (!res) throw new Error("error in fetch data posts");
     const { data } = res.data;
-    return data;
+    const newArr = shuffle(data as []);
+    return newArr;
   } catch (error) {
     console.error(error);
   }
